@@ -1,0 +1,9 @@
+---
+- name: install tools needed to debug network issues
+  apt:
+    name: "{{ network_tools }}"
+    state: latest
+    cache_valid_time: 3600
+  # with_items:
+  # - ntpdate
+  # - nmap

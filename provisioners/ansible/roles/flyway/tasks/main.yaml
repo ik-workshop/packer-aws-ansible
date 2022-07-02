@@ -1,0 +1,53 @@
+---
+- name: "Ensure Flyway install path exists"
+  file:
+    path: "{{ flyway_install_root }}"
+    state: directory
+    mode: "u=rwX,go=rX"
+
+- name: "Check if Flyway is already installed"
+  stat:
+    path: "{{ flyway_core_jar }}"
+  register: __flyway_core_jar_stat
+
+- block:
+  - name: "Download Flyway Command-line Tool"
+    maven_artifact:
+      group_id: "{{ flyway_group_id }}"
+      artifact_id: "{{ flyway_artifact_id }}"
+      version: "{{ flyway_version }}"
+      extension: "{{ flyway_artifact_extension }}"
+      repository_url: "{{ flyway_repo_url | default(flyway_default_maven_repository,True) }}"
+      state: present
+      username: "{{ flyway_repo_username | default(omit) }}"
+      password: "{{ flyway_repo_password | default(omit) }}"
+      timeout: "{{ flyway_maven_artifact_timeout }}"
+      dest: "{{ flyway_install_root }}/tmp_flyway.tar.gz"
+
+  - name: "Extract Flyway archive"
+    unarchive:
+      src: "{{ flyway_install_root }}/tmp_flyway.tar.gz"
+      dest: "{{ flyway_install_root }}"
+      remote_src: yes
+
+  - name: "Remove Flyway archive"
+    file:
+      path: "{{ flyway_install_root }}/tmp_flyway.tar.gz"
+      state: absent
+
+- name: "Ensure Flyway script is executable"
+  file:
+    path: "{{ flyway_commandline_script }}"
+    mode: "ugo+x"
+
+- name: "Ensure Flyway symblink exist"
+  file:
+    src: "{{ flyway_commandline_script }}"
+    dest: "{{ flyway_symblink }}"
+    state: link
+
+- name: "Make sure flyway is executable"
+  shell: flyway --version
+  register: out_flyway
+
+- debug: var=out_flyway.stdout_lines

@@ -1,0 +1,19 @@
+---
+# playbook.yml
+- name: 'Provision Image'
+  hosts: default
+  become: true
+
+  tasks:
+# Validate
+    - name: run a command
+      shell: uname -a
+      register: cmd
+
+    - debug: var=cmd.stdout_lines
+
+    - name: is ansible installed
+      shell: ansible-playbook --version
+      register: cmd_ansbile
+
+    - debug: var=cmd_ansbile.stdout_lines

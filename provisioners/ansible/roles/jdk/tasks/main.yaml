@@ -1,0 +1,21 @@
+---
+- name: Ensure 'man' directory exists.
+  file:  # noqa 208
+    path: /usr/share/man/man1
+    state: directory
+    mode: 0755
+    recurse: true
+  when:
+    - ansible_distribution is match('Ubuntu')
+    - ansible_distribution_major_version | int >= 18
+
+- name: ensure java is installed.
+  apt:
+    name: "{{ java_packages }}"
+    state: present
+
+- name: display the java version.
+  shell: java -version
+  register: java_version
+
+- debug: var=java_version.stdout_lines

@@ -1,0 +1,5 @@
+---
+network_debug_tools: yes
+network_tools:
+- "nmap"
+- "ntpdate"

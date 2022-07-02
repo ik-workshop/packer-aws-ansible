@@ -1,0 +1,19 @@
+---
+- name: "ensure system required packages(maven download) are installed"
+  package:
+    name: "{{ item }}"
+    state: present
+  with_items:
+    - "python3-lxml"
+
+- name: install jq
+  become: yes
+  apt:
+    name: jq
+    state: latest
+  when:
+    - ansible_distribution is match('Ubuntu')
+    - ansible_distribution_release is not match('trusty')
+
+- include: network.yaml
+  when: network_debug_tools

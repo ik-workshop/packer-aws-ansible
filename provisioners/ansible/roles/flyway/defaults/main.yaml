@@ -1,0 +1,13 @@
+---
+flyway_edition: community
+flyway_version: "8.5.12"
+flyway_group_id: "org.flywaydb"
+flyway_install_root: /opt/flyway
+flyway_install_version_path: "{{ flyway_install_root }}/flyway-{{ flyway_version }}"
+flyway_core_jar: "{{ flyway_install_version_path }}/lib/{{ flyway_edition }}/flyway-core-{{ flyway_version }}.jar"
+flyway_artifact_id: "flyway-commandline"
+flyway_artifact_extension: "tar.gz"
+flyway_default_maven_repository: "https://repo1.maven.org/maven2"
+flyway_maven_artifact_timeout: 60
+flyway_symblink: "/usr/local/bin/flyway"
+flyway_commandline_script: "{{ flyway_install_version_path }}/flyway"
