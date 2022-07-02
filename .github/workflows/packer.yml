@@ -26,4 +26,4 @@ jobs:
         with:
           command: validate
           arguments: -syntax-only
-          target: packer.pkr.hcl
+          target: aws-ubuntu.pkr.hcl
