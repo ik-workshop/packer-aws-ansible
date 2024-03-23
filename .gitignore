@@ -1,6 +1,5 @@
-
-# Created by https://www.toptal.com/developers/gitignore/api/visualstudiocode,macos,linux,windows,git
-# Edit at https://www.toptal.com/developers/gitignore?templates=visualstudiocode,macos,linux,windows,git
+# Created by https://www.toptal.com/developers/gitignore/api/git,linux,macos,windows,visualstudiocode,vagrant
+# Edit at https://www.toptal.com/developers/gitignore?templates=git,linux,macos,windows,visualstudiocode,vagrant
 
 ### Git ###
 # Created by git for backups. To disable backups in Git:
@@ -61,11 +60,33 @@ Network Trash Folder
 Temporary Items
 .apdisk
 
+### macOS Patch ###
+# iCloud generated files
+*.icloud
+
+### Vagrant ###
+# General
+.vagrant/
+
+# Log files (if you are creating logs in debug mode, uncomment this)
+# *.log
+
+### Vagrant Patch ###
+*.box
+
 ### VisualStudioCode ###
 .vscode/*
+!.vscode/settings.json
 !.vscode/tasks.json
 !.vscode/launch.json
-*.code-workspace
+!.vscode/extensions.json
+!.vscode/*.code-snippets
+
+# Local History for Visual Studio Code
+.history/
+
+# Built Visual Studio Code Extensions
+*.vsix
 
 ### VisualStudioCode Patch ###
 # Ignore all local history of files
@@ -98,4 +119,4 @@ $RECYCLE.BIN/
 # Windows shortcuts
 *.lnk
 
-# End of https://www.toptal.com/developers/gitignore/api/visualstudiocode,macos,linux,windows,git
+# End of https://www.toptal.com/developers/gitignore/api/git,linux,macos,windows,visualstudiocode,vagrant

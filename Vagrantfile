@@ -4,12 +4,9 @@
 CPUCOUNT = "1"
 RAM = "1024"
 
-# sudo apt-get autoremove -y
-
 $setup = <<SCRIPT
 #!/bin/sh
 
-# sudo apt-mark hold python2 python2-minimal python2.7 python2.7-minimal libpython2-stdlib libpython2.7-minimal libpython2.7-stdlib
 sudo apt update
 sudo apt install software-properties-common -y
 sudo add-apt-repository ppa:deadsnakes/ppa -y
@@ -45,13 +42,13 @@ Vagrant.configure("2") do |config|
 
     # config.vm.provision "version", type: "shell", inline: $setup, privileged: true
 
-    config.vm.provision "ansible_local" do |ansible|
-      # ansible.version     = "2.12.6"
-      ansible.install_mode  = :default
-      ansible.playbook      = "playbooks/playbook.yaml"
-      ansible.config_file     = 'ansible.cfg'
-      ansible.raw_arguments = ['--diff']
-    end
+    # config.vm.provision "ansible_local" do |ansible|
+    #   # ansible.version     = "2.12.6"
+    #   ansible.install_mode  = :default
+    #   ansible.playbook      = "playbooks/playbook.yaml"
+    #   ansible.config_file     = 'ansible.cfg'
+    #   ansible.raw_arguments = ['--diff']
+    # end
   end
 
   config.vm.post_up_message="Setup complete `vagrant ssh packer` to ssh into the box"

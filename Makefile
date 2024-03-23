@@ -14,3 +14,12 @@ install: ## Setup pre commit.
 
 validate: ## Validate files with pre-commit hooks
 	@pre-commit run --all-files
+
+run: ## Vagrant run
+	@vagrant up
+
+restart: ## Vagrant restart vm
+	@vagrant reload packer
+
+stop: ## Vagrant stop vm
+	@vagrant halt packer
